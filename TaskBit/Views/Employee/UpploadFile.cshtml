@@ -1,0 +1,19 @@
+﻿@model TaskBit.Models.Employee
+
+@{
+    ViewBag.Title = "UpploadFile";
+}
+
+<h2>UpploadFile</h2>
+
+
+<form actions="" method="post" enctype="multipart/form-data">
+    <table style="margin-top:1px">
+        <tr>
+            <td><label for="file">Filename:</label></td>
+            <td><input type="file" name="file" id="file" /></td>
+            <td> <input type="submit" value="upload" /></td>
+        </tr>
+     </table>
+</form>
+

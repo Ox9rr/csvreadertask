@@ -1,0 +1,251 @@
+﻿@model IEnumerable<TaskBit.Models.Employee>
+
+@{
+    ViewBag.Title = "Данные из таблицы";
+}
+
+
+
+<h2>База данных:</h2>
+<style>
+    table-condensed {
+        /*width: 100%;*/ /* Ширина таблицы в процентах */
+    }
+
+    .col-0 {
+        width: 118px; /* Ширина ячейки */
+    }
+</style>
+<table class="table table-bordered">
+    <col style="width:118px">
+    <tr class="table-filters">
+        <td class="col-0">
+            <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names.." id="idInputName" onkeyup="myFunction()">
+        </td>
+        <td class="col-1">
+            <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for DateOfBirth" id="idInputDateOfBirth" onkeyup="myFunctionmyInputDateOfBirth()">
+        </td>
+        <td class="col-2">
+            <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for isMarried" id="idInputisMarried" onkeyup="myFunctionisMarried()">
+        </td>
+        <td class="col-3">
+            <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for Phone" id="idInputPhone" onkeyup="myFunctionPhone()">
+        </td>
+        <td class="col-5">
+            <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for Salary" id="idInputSalary" onkeyup="myFunctionSalary()">
+        </td>
+        <td>
+            <p>Таблица фильтров</p>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered" id="myTable">
+    <tr class="header">
+        <th id="sortByName">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsMarried)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            <p>Операции над данными</p>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td class=" convToString">
+                @Html.DisplayFor(modelItem => item.IsMarried)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "AddOrEdit", new { id = item.Id }) |
+                @*@Html.ActionLink("Details", "Details", new {/* id=item.Id*/ }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="createOrUppload">
+    <p>
+        @Html.ActionLink("Добавить запись", "AddOrEdit")
+    </p>
+    <p>
+        @Html.ActionLink("Загрузить данные из файла CSV", "UpploadFile")
+    </p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("idInputName");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function myFunctionmyInputDateOfBirth() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("idInputDateOfBirth");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function myFunctionisMarried() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("idInputisMarried");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function myFunctionPhone() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("idInputPhone");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function myFunctionSalary() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("idInputSalary");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[4];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+
+<script>
+    $(document).on('keyup', '.filter_rep', function () {
+        var $this = $(this).val();
+        var val_array = [];
+        var id_array = [];
+
+        $('.filter_rep').each(function () {
+            thisval = $(this).val();
+            id = '.' + $(this).attr('id');
+            if (thisval) {
+                id_array.push(id);
+                val_array.push(thisval);
+            }
+        });
+        // using val_array to check all the columns and hide
+        if (val_array.length > 0) {
+            $('tr').each(function () {
+                $(this).show();
+            });
+            for (i = 0; i < val_array.length; i++) {
+                $(id_array[i]).each(function () {
+                    if (!($(this).text().toLowerCase().indexOf(val_array[i]) > -1)) {
+                        $(this).parent().hide();
+                    }
+                });
+            }
+        } else {
+            $('tr').each(function () {
+                $(this).show();
+            });
+        }
+    })
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $('th').click(function () {
+        var table = $(this).parents('table').eq(0)
+        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+        this.asc = !this.asc
+        if (!this.asc) { rows = rows.reverse() }
+        for (var i = 0; i < rows.length; i++) { table.append(rows[i]) }
+    })
+    function comparer(index) {
+        return function (a, b) {
+            var valA = getCellValue(a, index), valB = getCellValue(b, index)
+            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+        }
+    }
+    function getCellValue(row, index) { return $(row).children('td').eq(index).text() }
+</script>
